@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="twitchStatus" ng-controller="twitchStatusCtrl">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twitch Status</title>
+  <meta name="description" content="Twitch Status">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <main class="container">
+
+    <nav class="row titlePanel">
+      <!-- title panel -->
+
+      <div class="col-xs-10">
+        <h1>Twitch Streamers</h1>
+      </div>
+
+      <div class="col-xs-2">
+        <form>
+          <label>
+            <input type="radio" name="controls" ng-model="q" value="">All</label>
+          <br>
+          <label>
+            <input type="radio" name="controls" ng-model="q" value="true">Online</label>
+          <br>
+          <label>
+            <input type="radio" name="controls" ng-model="q" value="false">Offline</label>
+          <br>
+        </form>
+      </div>
+
+    </nav>
+
+    <div class="media fadeEffect" ng-class="{online: stream.isOnline, offline: !stream.isOnline}" ng-repeat="stream in streams | filter : {isOnline: q} | orderBy: 'isOnline' : true">
+
+      <div class="media-left media-middle">
+        <img class="logo img-circle" height="50px" width="50px" ng-src="{{stream.logo}}" alt="{{stream.displayName}} logo">
+      </div>
+      <div class="media-body">
+        <a class="media-heading h3" href="{{stream.url}}">{{stream.displayName}}</a>
+        <p>{{stream.status}}</p>
+      </div>
+
+    </div>
+
+    <footer class="row footer">
+      <!-- footer panel -->
+
+      <div class="col-xs-12">
+        <!-- footer content -->
+        <br>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
